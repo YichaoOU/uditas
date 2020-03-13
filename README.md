@@ -1,6 +1,94 @@
 UDiTaS v1.0
 ===========
 
+
+
+### Installation (tested at St. Jude)
+
+1. Download hg38.2bit
+
+`wget https://hgdownload.cse.ucsc.edu/goldenpath/hg38/bigZips/hg38.2bit`
+
+2. Download bowtie2 index
+
+```
+
+wget ftp://ftp.ncbi.nlm.nih.gov/genomes/archive/old_genbank/Eukaryotes/vertebrates_mammals/Homo_sapiens/GRCh38/seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.tar.gz
+
+tar zxvf GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.tar.gz
+
+mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.1.bt2 hg38.1.bt2
+mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.2.bt2 hg38.2.bt2
+mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.3.bt2 hg38.3.bt2
+mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.4.bt2 hg38.4.bt2
+mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.rev.1.bt2 hg38.rev.1.bt2
+mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.rev.2.bt2 hg38.rev.2.bt2
+
+```
+
+3. add ENV
+
+Note that the environment variable is the folder that containing 2bit or index files.
+
+```
+export BOWTIE2_INDEXES=/home/yli11/Data/Human/hg38/bowtie2/
+export GENOMES_2BIT=/home/yli11/Data/Human/hg38/
+
+```
+
+4. install udias dependencies
+
+```
+git clone https://github.com/YichaoOU/uditas.git
+
+cd uditas
+
+module load conda3
+
+conda env create -f uditas_env.yml
+
+source activate uditas_env
+
+conda install -c anaconda python-dateutil
+
+conda install -c conda-forge tbb
+
+python -m pip install matplotlib
+
+conda install -c conda-forge icu
+
+conda install -c anaconda qt
+
+conda install -c anaconda pyqt
+
+python setup.py install
+
+module load bowtie2/2.2.9
+
+pytest
+
+
+```
+
+The old `uditas_env.yml` has quite some dependency errors. I have modified the yaml file. Bowtie2 is also not installed successfully through conda, luckly our HPC has bowtie2 installed, so I don't need to install it again.
+
+You should be able to see this message if test is passed.
+
+```
+(uditas_env) [yli11@nodecn231 uditas]$ pytest
+========================================================= test session starts =========================================================
+platform linux2 -- Python 2.7.13, pytest-3.2.1, py-1.8.1, pluggy-0.4.0
+rootdir: /research/rgs01/home/clusterHome/yli11/test/uditas, inifile:
+collected 3 items                                                                                                                      
+
+test/test_fig2a.py .
+test/test_fig2b.py .
+test/test_fig2c.py .
+
+===================================================== 3 passed in 540.71 seconds =====================================================
+
+```
+
 Overview
 --------
 
