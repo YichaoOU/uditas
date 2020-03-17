@@ -1,7 +1,13 @@
 UDiTaS v1.0
 ===========
 
+### Changes
 
+`uditas.py` and `uditas_helper.py` are modified to solve the following issues:
+
+1. fastq file names were harcoded.
+2. sample_into.csv contained empty rows.
+3. bowtie2 index file incorrect
 
 ### Installation (tested at St. Jude)
 
@@ -23,6 +29,8 @@ mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.3.bt2 hg38.3.bt2
 mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.4.bt2 hg38.4.bt2
 mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.rev.1.bt2 hg38.rev.1.bt2
 mv GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index.rev.2.bt2 hg38.rev.2.bt2
+
+chmod a+rx *
 
 ```
 
