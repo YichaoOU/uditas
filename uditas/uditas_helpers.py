@@ -1190,9 +1190,9 @@ def align_genome_local(dir_sample, amplicon_info, assembly, check_plasmid_insert
 
 	# local alignment to the genome with bowtie2
 	initial_dir = os.getcwd()
-
+	
 	bowtie2_command = ['bowtie2', '--local', '-p', str(ncpu),
-					   '-X', '5000', '-k', '2', '-x', assembly,
+					   '-X', '5000', '-k', '2', '-x', os.environ.get('BOWTIE2_INDEXES')+assembly,
 							 '-1', file_R1, '-2', file_R2,
 							 '-S', file_sam_genome_local]
 
@@ -1813,7 +1813,7 @@ def align_genome_global(dir_sample, amplicon_info, assembly, ncpu=4):
 	initial_dir = os.getcwd()
 
 	bowtie2_command = ['bowtie2', '--very-sensitive', '-p', str(ncpu),
-					   '-X', '5000', '-k', '2', '-x', assembly,
+					   '-X', '5000', '-k', '2', '-x', os.environ.get('BOWTIE2_INDEXES')+assembly,
 					   '-1', file_R1, '-2', file_R2,
 					   '-S', file_sam_genome_global]
 
